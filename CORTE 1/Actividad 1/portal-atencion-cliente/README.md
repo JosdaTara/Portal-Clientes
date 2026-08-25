@@ -58,29 +58,57 @@ Disenar e implementar un portal web de atencion al cliente que permita recibir, 
 
 El sistema utiliza una arquitectura de tres capas (3-tier), estandar para aplicaciones web:
 
-`
-+---------------------------------------------------+
-|          CAPA DE PRESENTACION (Frontend)          |
-|   HTML5 + CSS3 + JavaScript + Bootstrap 5         |
-|   Plantillas PHP (vistas del sistema)             |
-+--------------------------+------------------------+
-                           | HTTP/HTTPS
-                           v
-+---------------------------------------------------+
-|          CAPA DE LOGICA (Backend)                 |
-|   PHP 8.x (lenguaje de servidor)                 |
-|   Funciones de validacion, autenticacion          |
-|   Generacion de reportes e integracion IA         |
-|   Consultas preparadas via PDO                    |
-+--------------------------+------------------------+
-                           | SQL
-                           v
-+---------------------------------------------------+
-|          CAPA DE DATOS (MySQL)                    |
-|   MySQL 8.x (motor InnoDB)                       |
-|   Base de datos: portal_atencion_cliente           |
-+---------------------------------------------------+
-`
+### Diagrama de Arquitectura
+
+```
+  +=========================================================================+
+  |                     PRESENTACION (Frontend)                             |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  |  |   Bootstrap 5     |  |   JavaScript      |  |   HTML5 / CSS3    |   |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  |  [ Paginas PHP: Login | Panel | Formularios | Reportes | IA ]         |
+  +========================================+================================+
+                                           |
+                                      HTTP/HTTPS
+                                           |
+                                           v
+  +========================================+================================+
+  |                      LOGICA (Backend)                                  |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  |  | Autenticacion     |  | Validacion        |  | Sesiones          |   |
+  |  | y Control Acceso  |  | de Datos          |  | y CSRF            |   |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  |  | Generacion de     |  | Integracion       |  | Consultas         |   |
+  |  | Reportes          |  | IA (Gemini)       |  | PDO Prepared      |   |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  +========================================+================================+
+                                           |
+                                           v
+  +=========================================================================+
+  |                         DATOS (MySQL)                                   |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  |  | usuarios          |  | solicitudes       |  | categorias        |   |
+  |  +-------------------+  +-------------------+  +-------------------+   |
+  |  +-------------------+  +-------------------+                          |
+  |  | seguimientos      |  | reportes_mensuales|                          |
+  |  +-------------------+  +-------------------+                          |
+  +=========================================================================+
+```
+
+### Descripcion por Capa
+
+| Capa | Componente | Tecnologia | Funcion |
+|------|-----------|------------|---------|
+| **Presentacion** | Bootstrap 5 | CSS Framework | Diseno responsivo y componentes UI |
+| **Presentacion** | JavaScript | ES6+ | Interactividad, validacion del lado del cliente |
+| **Presentacion** | PHP Templates | PHP 8.x | Generacion dinamica de paginas HTML |
+| **Logica** | auth.php | PHP | Autenticacion, sesiones, control de acceso |
+| **Logica** | funciones.php | PHP | Funciones auxiliares del sistema |
+| **Logica** | ia_service.php | PHP + API | Integracion con Google Gemini + fallback local |
+| **Logica** | PDO | PHP Extension | Consultas preparadas seguras a la BD |
+| **Datos** | MySQL 8.x | InnoDB | Almacenamiento relacional con integridad referencial |
+| **Datos** | 5 tablas | SQL | usuarios, categorias, solicitudes, seguimientos, reportes_mensuales |
 
 ---
 
@@ -252,20 +280,76 @@ Se utiliza la API de **Google Gemini** (modelo gemini-3.6-flash):
 
 ## 13. Estructura del proyecto
 
-`
+### Arbol de Directorios
+
+```
 portal-atencion-cliente/
-  config/                  Configuracion y conexion a BD
-  includes/                Funciones compartidas, auth, IA
-  auth/                    Login, logout, registro
-  modulo_cliente/          Panel del cliente, solicitudes, IA
-  modulo_atencion/         Gestion de solicitudes
-  modulo_reportes/         Reportes y estadisticas
-  modulo_ia/               Analisis inteligente
-  modulo_admin/            Gestion de usuarios y categorias
-  assets/css/              Estilos
-  assets/js/               JavaScript
-  portal_atencion_cliente.sql  Script de la BD
-`
+│
+├── config/                          CONFIGURACION DEL SISTEMA
+│   ├── conexion.php                 Conexion PDO a MySQL
+│   ├── api_key.example.php          Plantilla para API key de Gemini
+│   └── api_key.php                  API key real (excluido de git)
+│
+├── includes/                        FUNCIONES COMPARTIDAS
+│   ├── auth.php                     Autenticacion y control de acceso
+│   ├── funciones.php                Funciones auxiliares del sistema
+│   ├── ia_service.php               Integracion con Google Gemini
+│   ├── header.php                   Cabecera HTML comun (navbar)
+│   └── footer.php                   Pie de pagina comun
+│
+├── auth/                            AUTENTICACION
+│   ├── login.php                    Formulario y proceso de login
+│   ├── logout.php                   Cierre de sesion
+│   └── registrar.php                Formulario de registro de clientes
+│
+├── modulo_cliente/                  PANEL DEL CLIENTE
+│   ├── index.php                    Dashboard del cliente
+│   ├── registrar_solicitud.php      Formulario nueva solicitud
+│   ├── consultar_solicitud.php      Buscar por numero de caso
+│   ├── historial.php                Historial de solicitudes propias
+│   └── ia_cliente.php               Asistente IA para clientes
+│
+├── modulo_atencion/                 GESTION DE SOLICITUDES
+│   ├── index.php                    Lista con filtros y busqueda
+│   └── detalle_solicitud.php        Detalle + seguimientos + cambio estado
+│
+├── modulo_reportes/                 REPORTES Y ESTADISTICAS
+│   └── index.php                    Reporte mensual con indicadores
+│
+├── modulo_ia/                       INTELIGENCIA ARTIFICIAL
+│   ├── index.php                    Dashboard de analisis IA
+│   └── consultar.php                Consulta personalizada con IA
+│
+├── modulo_admin/                    ADMINISTRACION
+│   ├── usuarios.php                 Gestion CRUD de usuarios
+│   └── categorias.php              Gestion CRUD de categorias
+│
+├── assets/                          RECURSOS ESTATICOS
+│   ├── css/
+│   │   └── estilo.css               Estilos personalizados
+│   └── js/
+│       └── app.js                   Funciones JavaScript
+│
+├── index.php                        Pagina principal (redirige a login)
+├── portal_atencion_cliente.sql      Script SQL de la base de datos
+├── README.md                        Documentacion del proyecto
+└── .gitignore                       Archivos excluidos de git
+```
+
+### Tabla de Archivos por Modulo
+
+| Modulo | Archivos | Funcion Principal |
+|--------|----------|-------------------|
+| **config/** | 3 archivos | Conexion a BD y API key |
+| **includes/** | 5 archivos | Funciones compartidas, header/footer, IA |
+| **auth/** | 3 archivos | Login, logout, registro |
+| **modulo_cliente/** | 5 archivos | Solicitudes, consulta, historial, IA cliente |
+| **modulo_atencion/** | 2 archivos | Gestion y detalle de solicitudes |
+| **modulo_reportes/** | 1 archivo | Reportes mensuales |
+| **modulo_ia/** | 2 archivos | Analisis y consultas IA |
+| **modulo_admin/** | 2 archivos | Usuarios y categorias |
+| **assets/** | 2 archivos | CSS y JavaScript |
+| **Raiz** | 4 archivos | index.php, SQL, README, .gitignore |
 
 ---
 
