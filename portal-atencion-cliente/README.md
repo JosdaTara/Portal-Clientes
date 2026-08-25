@@ -84,17 +84,17 @@ El sistema utiliza una arquitectura de tres capas (3-tier), estandar para aplica
 
 ## 4. Tecnologias utilizadas
 
-| Tecnologia | Version | Funcion |
+| Tecnologia | Funcion |
 |-----------|---------|---------|
-| PHP | 8.x | Backend / logica de servidor |
-| MySQL | 8.x | Base de datos relacional |
-| Apache | 2.4 | Servidor web (via XAMPP) |
-| HTML5 | - | Estructura de paginas |
-| CSS3 | - | Estilos visuales |
-| JavaScript | ES6+ | Interactividad del cliente |
-| Bootstrap | 5.x | Framework CSS responsivo |
-| Google Gemini API | - | Inteligencia artificial |
-| PDO | - | Conexion segura a la base de datos |
+| PHP | Backend / logica de servidor |
+| MySQL | Base de datos relacional |
+| Apache | Servidor web (via XAMPP) |
+| HTML5 | Estructura de paginas |
+| CSS3 | Estilos visuales |
+| JavaScript | Interactividad del cliente |
+| Bootstrap | Framework CSS responsivo |
+| Google Gemini API | Inteligencia artificial |
+| PDO | Conexion segura a la base de datos |
 
 ---
 
