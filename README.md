@@ -1,4 +1,4 @@
-﻿# Portal de Atencion al Cliente
+# Portal de Atencion al Cliente
 
 Sistema web integral de atencion al cliente que opera 24 horas al dia, 7 dias a la semana. Permite a los clientes registrar solicitudes de forma autonoma, a los agentes gestionar y dar seguimiento a los casos, y a la administracion analizar la informacion mediante reportes e inteligencia artificial.
 
@@ -275,5 +275,3 @@ portal-atencion-cliente/
 - **Migrar a produccion**: subir a hosting, actualizar rutas, configurar HTTPS
 
 ---
-
-Proyecto academico - Universidad Tecnologica de San Jose del Tunar (UTS)
