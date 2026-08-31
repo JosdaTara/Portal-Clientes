@@ -1,118 +1,601 @@
 /* =====================================================
    ESTILOS PERSONALIZADOS - Portal de Atencion al Cliente
+   Rediseno: Minimalista / Corporativo Profesional
    ===================================================== */
+
+:root {
+    --app-bg: #f5f6f8;
+    --app-surface: #ffffff;
+    --app-border: #e4e7eb;
+    --app-text: #2b3440;
+    --app-text-muted: #6b7280;
+    --app-accent: #1f3a5f;
+    --app-accent-strong: #16293f;
+    --app-accent-soft: #eef2f7;
+    --app-font: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+}
 
 /* Tipografia base */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    font-family: var(--app-font);
+    background-color: var(--app-bg);
+    color: var(--app-text);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--app-text);
+    letter-spacing: -0.01em;
 }
 
 main {
     flex: 1;
 }
 
-/* Navbar */
-.navbar-brand i {
-    font-size: 1.3em;
+a {
+    color: var(--app-accent);
 }
 
-/* Cards */
-.card {
+a:hover {
+    color: var(--app-accent-strong);
+}
+
+/* =====================================================
+   NAVBAR - Estilo corporativo limpio
+   ===================================================== */
+.navbar {
+    background-color: var(--app-surface) !important;
+    border-bottom: 1px solid var(--app-border);
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+}
+
+.navbar.navbar-dark,
+.navbar.bg-dark {
+    background-color: var(--app-surface) !important;
+}
+
+.navbar-brand {
+    color: var(--app-text) !important;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+}
+
+.navbar-brand i {
+    color: var(--app-accent);
+    font-size: 1.15em;
+    margin-right: 0.15rem;
+}
+
+.navbar .nav-link {
+    color: var(--app-text-muted) !important;
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding-right: 0.85rem !important;
+    padding-left: 0.85rem !important;
+    transition: color 0.15s ease;
+}
+
+.navbar .nav-link:hover {
+    color: var(--app-text) !important;
+}
+
+.navbar .nav-link.dropdown-toggle {
+    color: var(--app-text) !important;
+}
+
+.navbar .nav-link.text-light {
+    color: var(--app-text) !important;
+}
+
+.navbar .nav-link.text-danger {
+    color: #b91c1c !important;
+}
+
+.navbar .nav-link .badge {
+    background-color: var(--app-accent-soft) !important;
+    color: var(--app-accent) !important;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.navbar-toggler {
+    border-color: var(--app-border) !important;
+}
+
+.navbar-toggler-icon {
+    filter: invert(0.45);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    border: 1px solid var(--app-border);
     border-radius: 0.5rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+    padding: 0.4rem;
+}
+
+.dropdown-item {
+    border-radius: 0.35rem;
+    font-size: 0.92rem;
+    color: var(--app-text);
+    padding: 0.5rem 0.75rem;
+}
+
+.dropdown-item i {
+    color: var(--app-accent);
+    width: 1.2em;
+}
+
+.dropdown-item:hover {
+    background-color: var(--app-accent-soft);
+}
+
+/* =====================================================
+   CARDS - Superficies minimalistas
+   ===================================================== */
+.card {
+    background-color: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 0.6rem;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.03);
+    animation: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .card:hover {
-    transform: translateY(-2px);
+    transform: none;
+    box-shadow: 0 4px 14px rgba(16, 24, 40, 0.06);
 }
 
-.card-body h3 {
+.card-body {
+    color: var(--app-text);
+}
+
+.card-body h1, .card-body h2, .card-body h3, .card-body h4 {
+    color: var(--app-text);
+}
+
+.card-body small,
+.card-body .text-muted {
+    color: var(--app-text-muted) !important;
+}
+
+.card-header {
+    background-color: #fafbfc;
+    border-bottom: 1px solid var(--app-border);
+    color: var(--app-text);
+    font-weight: 600;
+}
+
+/* Cards de metricas (KPIs) - reportes y dashboard */
+.card.text-bg-primary,
+.card.text-bg-warning,
+.card.text-bg-info,
+.card.text-bg-success,
+.card.text-bg-secondary,
+.card.text-bg-dark {
+    background-color: var(--app-surface) !important;
+    color: var(--app-text) !important;
+    border: 1px solid var(--app-border) !important;
+    text-align: center;
+}
+
+.card.text-bg-primary h1, .card.text-bg-primary h2, .card.text-bg-primary h3,
+.card.text-bg-warning h1, .card.text-bg-warning h2, .card.text-bg-warning h3,
+.card.text-bg-info h1, .card.text-bg-info h2, .card.text-bg-info h3,
+.card.text-bg-success h1, .card.text-bg-success h2, .card.text-bg-success h3,
+.card.text-bg-secondary h1, .card.text-bg-secondary h2, .card.text-bg-secondary h3,
+.card.text-bg-dark h1, .card.text-bg-dark h2, .card.text-bg-dark h3 {
+    color: var(--app-accent) !important;
     font-weight: 700;
 }
 
-/* Badges */
-.badge {
-    font-size: 0.8em;
-    padding: 0.4em 0.7em;
+.card.text-bg-primary .card-body,
+.card.text-bg-warning .card-body,
+.card.text-bg-info .card-body,
+.card.text-bg-success .card-body,
+.card.text-bg-secondary .card-body,
+.card.text-bg-dark .card-body {
+    color: var(--app-text) !important;
 }
 
-/* Tablas */
-.table th {
+.card.text-bg-primary .card-body p,
+.card.text-bg-warning .card-body p,
+.card.text-bg-info .card-body p,
+.card.text-bg-success .card-body p,
+.card.text-bg-secondary .card-body p,
+.card.text-bg-dark .card-body p {
+    color: var(--app-text-muted);
+    font-size: 0.85rem;
+}
+
+.card.text-bg-primary .card-body > i,
+.card.text-bg-warning .card-body > i,
+.card.text-bg-info .card-body > i,
+.card.text-bg-success .card-body > i,
+.card.text-bg-secondary .card-body > i,
+.card.text-bg-dark .card-body > i {
+    color: var(--app-accent);
+}
+
+.card.text-bg-primary .card-body small,
+.card.text-bg-warning .card-body small,
+.card.text-bg-info .card-body small,
+.card.text-bg-success .card-body small,
+.card.text-bg-secondary .card-body small,
+.card.text-bg-dark .card-body small {
+    color: var(--app-text-muted) !important;
+    display: block;
+}
+
+/* Cards de acceso rapido (dashboard cliente) */
+.card.border-primary,
+.card.border-success,
+.card.border-info {
+    border-color: var(--app-border) !important;
+    text-decoration: none;
+    color: var(--app-text);
+}
+
+.card.border-primary:hover,
+.card.border-success:hover,
+.card.border-info:hover {
+    border-color: var(--app-accent) !important;
+    box-shadow: 0 4px 14px rgba(16, 24, 40, 0.06);
+}
+
+.card.border-primary .text-primary,
+.card.border-info .text-info {
+    color: var(--app-accent) !important;
+}
+
+.card.border-success .text-success {
+    color: #1b7a4b !important;
+}
+
+.card.border-primary .card-title,
+.card.border-info .card-title,
+.card.border-success .card-title {
+    color: var(--app-text);
+}
+
+.card.shadow {
+    box-shadow: 0 2px 10px rgba(16, 24, 40, 0.06) !important;
+    border: 1px solid var(--app-border);
+}
+
+/* Tarjeta de detalle con cabecera coloreada */
+.card.border-primary {
+    border-color: var(--app-border) !important;
+}
+
+.card-header.bg-primary {
+    background-color: var(--app-accent) !important;
+}
+
+.card-header.bg-primary.text-white {
+    color: #ffffff !important;
+}
+
+.card-header.bg-primary h5 {
+    color: #ffffff !important;
+}
+
+/* =====================================================
+   TABLAS - Cabeceras neutras
+   ===================================================== */
+.table {
+    color: var(--app-text);
+    border-color: var(--app-border);
+}
+
+.table thead th,
+.table-dark thead th,
+.table thead.table-dark th {
+    background-color: #f3f5f7 !important;
+    color: var(--app-text) !important;
+    border-color: var(--app-border) !important;
     font-weight: 600;
-    font-size: 0.85em;
+    font-size: 0.78rem;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
 }
 
-.table td {
-    vertical-align: middle;
+.table-dark {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--app-text);
 }
 
 .table-hover tbody tr:hover {
-    background-color: rgba(13, 110, 253, 0.05);
+    background-color: var(--app-accent-soft);
 }
 
-/* Alertas */
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    --bs-table-striped-bg: #f8f9fb;
+    color: var(--app-text);
+}
+
+.table-warning > * {
+    --bs-table-bg: #fdf6e3;
+}
+
+.table.bordered,
+.table-bordered {
+    border-color: var(--app-border);
+}
+
+.table-bordered thead th {
+    background-color: #f3f5f7 !important;
+    color: var(--app-text) !important;
+}
+
+/* =====================================================
+   BADGES - Tonos pastel sobrios
+   ===================================================== */
+.badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.35em 0.7em;
+    border-radius: 0.4rem;
+    letter-spacing: 0.01em;
+}
+
+.badge.bg-primary {
+    background-color: var(--app-accent-soft) !important;
+    color: var(--app-accent) !important;
+}
+
+.badge.bg-success {
+    background-color: #e3f4ea !important;
+    color: #1b7a4b !important;
+}
+
+.badge.bg-danger {
+    background-color: #fdeaea !important;
+    color: #b91c1c !important;
+}
+
+.badge.bg-warning.text-dark {
+    background-color: #fbf0d8 !important;
+    color: #92610c !important;
+}
+
+.badge.bg-info.text-dark {
+    background-color: #e4f0fb !important;
+    color: #1f5f96 !important;
+}
+
+.badge.bg-info {
+    background-color: #e4f0fb !important;
+    color: #1f5f96 !important;
+}
+
+.table-warning .badge {
+    color: inherit;
+}
+
+/* =====================================================
+   FORMULARIOS
+   ===================================================== */
+.form-control,
+.form-select {
+    border: 1px solid #d5dae1;
+    border-radius: 0.45rem;
+    font-size: 0.92rem;
+    color: var(--app-text);
+    padding: 0.55rem 0.8rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--app-accent);
+    box-shadow: 0 0 0 0.15rem rgba(31, 58, 95, 0.12);
+}
+
+.form-label {
+    font-size: 0.85rem;
+    color: var(--app-text-muted);
+    margin-bottom: 0.35rem;
+}
+
+.form-control-sm,
+.form-select-sm {
+    font-size: 0.85rem;
+}
+
+/* =====================================================
+   BOTONES
+   ===================================================== */
+.btn {
+    border-radius: 0.45rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:disabled {
+    background-color: var(--app-accent) !important;
+    border-color: var(--app-accent) !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--app-accent-strong) !important;
+}
+
+.btn-outline-primary {
+    color: var(--app-accent);
+    border-color: var(--app-accent);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--app-accent);
+    border-color: var(--app-accent);
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    color: var(--app-text-muted);
+    border-color: #c7cdd5;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #eef1f4;
+    color: var(--app-text);
+    border-color: #c7cdd5;
+}
+
+.btn-outline-dark {
+    color: var(--app-text);
+    border-color: #d5dae1;
+}
+
+.btn-outline-dark:hover {
+    background-color: #eef1f4;
+    color: var(--app-text);
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    border-color: #6b7280;
+}
+
+.btn-sm {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.7rem;
+}
+
+.btn-lg {
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+}
+
+/* =====================================================
+   ALERTAS
+   ===================================================== */
 .alert {
     border-radius: 0.5rem;
-    border: none;
+    border: 1px solid transparent;
+    font-size: 0.9rem;
 }
 
-/* Timeline / Seguimientos */
+.alert-info {
+    background-color: #eef4fb;
+    color: #1f5f96;
+    border-color: transparent;
+}
+
+.alert-secondary {
+    background-color: #f3f5f7;
+    color: var(--app-text-muted);
+    border-color: transparent;
+}
+
+.alert-danger {
+    background-color: #fdeaea;
+    color: #b91c1c;
+    border-color: transparent;
+}
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+.progress {
+    background-color: #eef1f4;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-color: var(--app-accent);
+    transition: width 0.4s ease;
+}
+
+.progress-bar.bg-primary {
+    background-color: var(--app-accent) !important;
+}
+
+/* =====================================================
+   TIMELINE / SEGUIMIENTOS
+   ===================================================== */
 .timeline .card {
-    border-left: 3px solid #0d6efd;
+    border-left: 3px solid var(--app-border);
     margin-left: 1rem;
 }
 
 .timeline .card:last-child {
-    border-left: 3px solid #198754;
+    border-left-color: #1b7a4b;
 }
 
-/* Formularios */
-.form-control:focus,
-.form-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+.card .text-primary {
+    color: var(--app-accent) !important;
 }
 
-.form-label {
-    font-size: 0.9em;
+/* =====================================================
+   DESCRIPCION / CAJAS DE CONTENIDO
+   ===================================================== */
+.bg-light.p-3,
+div.bg-light.p-3 {
+    background-color: #f7f8fa !important;
+    border-color: var(--app-border) !important;
+    color: var(--app-text);
+    border: 1px solid var(--app-border);
 }
 
-/* Botones */
-.btn {
-    border-radius: 0.375rem;
-    font-weight: 500;
+/* =====================================================
+   DISPLAY / ENCABEZADOS DE PAGINA
+   ===================================================== */
+.display-3, .display-4 {
+    font-weight: 600;
 }
 
-.btn-lg {
-    padding: 0.6rem 1.5rem;
-}
-
-/* Login / Registro cards */
-.card.shadow {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Progress bars en reportes */
-.progress {
-    border-radius: 0.5rem;
-}
-
-.progress-bar {
-    transition: width 0.5s ease;
-}
-
-/* Footer */
+/* =====================================================
+   FOOTER
+   ===================================================== */
 footer {
     margin-top: auto;
+    background-color: var(--app-surface);
+    border-top: 1px solid var(--app-border);
 }
 
-/* Responsive ajustes */
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f2f4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c2c7cf;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9aa1ab;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 @media (max-width: 768px) {
     .table {
         font-size: 0.85em;
@@ -131,41 +614,9 @@ footer {
     }
 }
 
-/* Animacion de cards en dashboard */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.card {
-    animation: fadeInUp 0.4s ease;
-}
-
-/* Scrollbar personalizada */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* Impresion */
+/* =====================================================
+   IMPRESION
+   ===================================================== */
 @media print {
     .navbar,
     footer,
